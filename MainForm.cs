@@ -158,5 +158,18 @@ namespace Douha_DBMS
                 }
             }
         }
+
+        private void ListDB_DoubleClick(object sender, EventArgs e)
+        {
+            if (listDB.SelectedIndex >= 0)
+            {
+                var security = $"False;User ID={textUser.Text};Password={textPW.Text}";
+                security = checkAuth.Checked ? "True" : security;
+                var connString = $@"Data Source={textServer.Text};Initial Catalog={listDB.SelectedItem};Integrated Security={security}";
+
+                TablesForm tablesForm = new TablesForm(connString, listDB.SelectedItem.ToString());
+                tablesForm.ShowDialog();
+            }
+        }
     }
 }
