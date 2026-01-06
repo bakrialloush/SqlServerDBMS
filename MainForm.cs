@@ -190,5 +190,57 @@ namespace Douha_DBMS
                 tablesForm.ShowDialog();
             }
         }
+        private void BackupSelectedDatabase()
+        {
+            using (SaveFileDialog sfd = new SaveFileDialog())
+            {
+                sfd.Filter = "SQL Backup (*.bak)|*.bak";
+                sfd.FileName = $"{listDB.SelectedItem}.bak";
+
+                if (sfd.ShowDialog() != DialogResult.OK)
+                    return;
+
+                try
+                {
+                    Enabled = false;
+                    Cursor = Cursors.WaitCursor;
+
+                    var security = $"False;User ID={textUser.Text};Password={textPW.Text}";
+                    security = checkAuth.Checked ? "True" : security;
+
+                    using (SqlConnection connection = new SqlConnection(
+                        $@"Data Source={textServer.Text};Integrated Security={security}"))
+                    using (SqlCommand command = new SqlCommand(
+                        $"BACKUP DATABASE [{listDB.SelectedItem}] TO DISK = @path WITH INIT", connection))
+                    {
+                        command.Parameters.AddWithValue("@path", sfd.FileName);
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                    }
+
+                    MessageBox.Show("Backup completed successfully.");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Backup failed: " + ex.Message);
+                }
+                finally
+                {
+                    Cursor = Cursors.Default;
+                    Enabled = true;
+                }
+            }
+        }
+
+
+        private void BtnBackup_Click(object sender, EventArgs e)
+        {
+            if (listDB.SelectedIndex < 0)
+            {
+                MessageBox.Show("Select a database first.");
+                return;
+            }
+            BackupSelectedDatabase();
+        }
     }
 }

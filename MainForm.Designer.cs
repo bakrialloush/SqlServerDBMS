@@ -26,6 +26,7 @@
             this.btnDropDB = new System.Windows.Forms.Button();
             this.textNewDB = new System.Windows.Forms.TextBox();
             this.btnCreateDB = new System.Windows.Forms.Button();
+            this.btnBackup = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textServer
@@ -86,7 +87,7 @@
             this.listDB.ItemHeight = 17;
             this.listDB.Location = new System.Drawing.Point(279, 77);
             this.listDB.Name = "listDB";
-            this.listDB.Size = new System.Drawing.Size(322, 157);
+            this.listDB.Size = new System.Drawing.Size(322, 123);
             this.listDB.TabIndex = 6;
             this.listDB.DoubleClick += new System.EventHandler(this.ListDB_DoubleClick);
             // 
@@ -94,7 +95,7 @@
             // 
             this.btnDropDB.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnDropDB.Enabled = false;
-            this.btnDropDB.Location = new System.Drawing.Point(487, 251);
+            this.btnDropDB.Location = new System.Drawing.Point(487, 210);
             this.btnDropDB.Name = "btnDropDB";
             this.btnDropDB.Size = new System.Drawing.Size(114, 37);
             this.btnDropDB.TabIndex = 7;
@@ -106,7 +107,7 @@
             // 
             this.textNewDB.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.textNewDB.Enabled = false;
-            this.textNewDB.Location = new System.Drawing.Point(279, 256);
+            this.textNewDB.Location = new System.Drawing.Point(279, 215);
             this.textNewDB.Name = "textNewDB";
             this.textNewDB.Size = new System.Drawing.Size(126, 25);
             this.textNewDB.TabIndex = 8;
@@ -115,7 +116,7 @@
             // 
             this.btnCreateDB.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnCreateDB.Enabled = false;
-            this.btnCreateDB.Location = new System.Drawing.Point(411, 251);
+            this.btnCreateDB.Location = new System.Drawing.Point(411, 210);
             this.btnCreateDB.Name = "btnCreateDB";
             this.btnCreateDB.Size = new System.Drawing.Size(70, 37);
             this.btnCreateDB.TabIndex = 9;
@@ -123,11 +124,23 @@
             this.btnCreateDB.UseVisualStyleBackColor = true;
             this.btnCreateDB.Click += new System.EventHandler(this.BtnCreateDB_Click);
             // 
+            // btnBackup
+            // 
+            this.btnBackup.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnBackup.Location = new System.Drawing.Point(279, 251);
+            this.btnBackup.Name = "btnBackup";
+            this.btnBackup.Size = new System.Drawing.Size(322, 37);
+            this.btnBackup.TabIndex = 10;
+            this.btnBackup.Text = "Backup Selected";
+            this.btnBackup.UseVisualStyleBackColor = true;
+            this.btnBackup.Click += new System.EventHandler(this.BtnBackup_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(651, 365);
+            this.Controls.Add(this.btnBackup);
             this.Controls.Add(this.btnCreateDB);
             this.Controls.Add(this.textNewDB);
             this.Controls.Add(this.btnDropDB);
@@ -158,5 +171,6 @@
         private System.Windows.Forms.Button btnDropDB;
         private System.Windows.Forms.TextBox textNewDB;
         private System.Windows.Forms.Button btnCreateDB;
+        private System.Windows.Forms.Button btnBackup;
     }
 }
