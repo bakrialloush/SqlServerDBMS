@@ -94,7 +94,7 @@ namespace Douha_DBMS
 
         private void UpdateControlStates()
         {
-            textNewDB.Enabled = isConnected;
+            textDbName.Enabled = isConnected;
             btnCreateDB.Enabled = isConnected;
             btnDropDB.Enabled = isConnected;
         }
@@ -146,14 +146,14 @@ namespace Douha_DBMS
 
         private void BtnCreateDB_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(textNewDB.Text))
+            if (!string.IsNullOrWhiteSpace(textDbName.Text))
             {
                 try
                 {
                     Enabled = false;
                     Cursor = Cursors.WaitCursor;
 
-                    var createCommand = $"CREATE DATABASE [{textNewDB.Text}]";
+                    var createCommand = $"CREATE DATABASE [{textDbName.Text}]";
                     var connection = new SqlConnection();
                     using (SqlCommand command = new SqlCommand(createCommand, connection))
                     {
@@ -163,7 +163,7 @@ namespace Douha_DBMS
                         connection.Open();
                         command.ExecuteNonQuery();
                     }
-                    textNewDB.Text = "";
+                    textDbName.Text = "";
                 }
                 catch (Exception ex)
                 {
@@ -241,6 +241,55 @@ namespace Douha_DBMS
                 return;
             }
             BackupSelectedDatabase();
+        }
+
+        private void RenameSelectedDatabase(string newDatabaseName)
+        {
+            try
+            {
+                Enabled = false;
+                Cursor = Cursors.WaitCursor;
+
+                var security = $"False;User ID={textUser.Text};Password={textPW.Text}";
+                security = checkAuth.Checked ? "True" : security;
+
+                using (SqlConnection connection = new SqlConnection(
+                    $@"Data Source={textServer.Text};Integrated Security={security}"))
+                using (SqlCommand command = new SqlCommand(
+                    $"ALTER DATABASE [{listDB.SelectedItem}] MODIFY NAME = [{newDatabaseName}]", connection))
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+
+                MessageBox.Show("Database renamed successfully.");
+                ReloadDBs();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
+                Enabled = true;
+            }
+        }
+
+        private void BtnRename_Click(object sender, EventArgs e)
+        {
+            if (listDB.SelectedIndex < 0)
+            {
+                MessageBox.Show("Select a database first.");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(textDbName.Text.Trim()))
+            {
+                MessageBox.Show("Database name cannot be empty.");
+                return;
+            }
+            RenameSelectedDatabase(textDbName.Text.Trim());
         }
     }
 }
