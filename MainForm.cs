@@ -14,7 +14,7 @@ namespace Douha_DBMS
             InitializeComponent();
         }
 
-        private void btnGetDBs_Click(object sender, EventArgs e)
+        private void BtnGetDBs_Click(object sender, EventArgs e)
         {
             ReloadDBs();
         }
@@ -66,7 +66,7 @@ namespace Douha_DBMS
             return databaseNames;
         }
 
-        private void checkAuth_CheckedChanged(object sender, EventArgs e)
+        private void CheckAuth_CheckedChanged(object sender, EventArgs e)
         {
             textUser.Enabled = !checkAuth.Checked;
             textPW.Enabled = !checkAuth.Checked;
@@ -75,7 +75,7 @@ namespace Douha_DBMS
             textPW.Text = "";
         }
 
-        private void btnDropDB_Click(object sender, EventArgs e)
+        private void BtnDropDB_Click(object sender, EventArgs e)
         {
             if (listDB.SelectedIndex >= 0)
             {

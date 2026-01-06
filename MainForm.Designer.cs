@@ -75,7 +75,7 @@
             this.checkAuth.TabIndex = 3;
             this.checkAuth.Text = "Integrated auth";
             this.checkAuth.UseVisualStyleBackColor = true;
-            this.checkAuth.CheckedChanged += new System.EventHandler(this.checkAuth_CheckedChanged);
+            this.checkAuth.CheckedChanged += new System.EventHandler(this.CheckAuth_CheckedChanged);
             // 
             // btnGetDBs
             // 
@@ -86,7 +86,7 @@
             this.btnGetDBs.TabIndex = 5;
             this.btnGetDBs.Text = "Get databases";
             this.btnGetDBs.UseVisualStyleBackColor = true;
-            this.btnGetDBs.Click += new System.EventHandler(this.btnGetDBs_Click);
+            this.btnGetDBs.Click += new System.EventHandler(this.BtnGetDBs_Click);
             // 
             // listDB
             // 
@@ -107,7 +107,7 @@
             this.btnDropDB.TabIndex = 7;
             this.btnDropDB.Text = "Drop database";
             this.btnDropDB.UseVisualStyleBackColor = true;
-            this.btnDropDB.Click += new System.EventHandler(this.btnDropDB_Click);
+            this.btnDropDB.Click += new System.EventHandler(this.BtnDropDB_Click);
             // 
             // MainForm
             // 
