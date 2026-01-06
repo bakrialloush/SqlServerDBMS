@@ -14,6 +14,24 @@ namespace Douha_DBMS
         public MainForm()
         {
             InitializeComponent();
+            LoadConnectionSettings();
+        }
+
+        private void LoadConnectionSettings()
+        {
+            textServer.Text = Properties.Settings.Default.ServerName;
+            checkAuth.Checked = Properties.Settings.Default.UseIntegratedAuth;
+            textUser.Text = Properties.Settings.Default.Username;
+            textPW.Text = Properties.Settings.Default.Password;
+        }
+
+        private void SaveConnectionSettings()
+        {
+            Properties.Settings.Default.ServerName = textServer.Text;
+            Properties.Settings.Default.UseIntegratedAuth = checkAuth.Checked;
+            Properties.Settings.Default.Username = textUser.Text;
+            Properties.Settings.Default.Password = textPW.Text;
+            Properties.Settings.Default.Save();
         }
 
         private void BtnGetDBs_Click(object sender, EventArgs e)
@@ -56,6 +74,7 @@ namespace Douha_DBMS
 
                     isConnected = true;
                     UpdateControlStates();
+                    SaveConnectionSettings();
                 }
                 catch (Exception ex)
                 {
