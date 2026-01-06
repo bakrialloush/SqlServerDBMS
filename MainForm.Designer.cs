@@ -35,6 +35,8 @@
             this.btnGetDBs = new System.Windows.Forms.Button();
             this.listDB = new System.Windows.Forms.ListBox();
             this.btnDropDB = new System.Windows.Forms.Button();
+            this.textNewDB = new System.Windows.Forms.TextBox();
+            this.btnCreateDB = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textServer
@@ -101,19 +103,43 @@
             // btnDropDB
             // 
             this.btnDropDB.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnDropDB.Location = new System.Drawing.Point(279, 251);
+            this.btnDropDB.Enabled = false;
+            this.btnDropDB.Location = new System.Drawing.Point(487, 251);
             this.btnDropDB.Name = "btnDropDB";
-            this.btnDropDB.Size = new System.Drawing.Size(204, 37);
+            this.btnDropDB.Size = new System.Drawing.Size(114, 37);
             this.btnDropDB.TabIndex = 7;
             this.btnDropDB.Text = "Drop database";
             this.btnDropDB.UseVisualStyleBackColor = true;
             this.btnDropDB.Click += new System.EventHandler(this.BtnDropDB_Click);
+            // 
+            // textNewDB
+            // 
+            this.textNewDB.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.textNewDB.Enabled = false;
+            this.textNewDB.Location = new System.Drawing.Point(279, 256);
+            this.textNewDB.Name = "textNewDB";
+            this.textNewDB.Size = new System.Drawing.Size(126, 25);
+            this.textNewDB.TabIndex = 8;
+            // 
+            // btnCreateDB
+            // 
+            this.btnCreateDB.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnCreateDB.Enabled = false;
+            this.btnCreateDB.Location = new System.Drawing.Point(411, 251);
+            this.btnCreateDB.Name = "btnCreateDB";
+            this.btnCreateDB.Size = new System.Drawing.Size(70, 37);
+            this.btnCreateDB.TabIndex = 9;
+            this.btnCreateDB.Text = "Create";
+            this.btnCreateDB.UseVisualStyleBackColor = true;
+            this.btnCreateDB.Click += new System.EventHandler(this.BtnCreateDB_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(651, 365);
+            this.Controls.Add(this.btnCreateDB);
+            this.Controls.Add(this.textNewDB);
             this.Controls.Add(this.btnDropDB);
             this.Controls.Add(this.listDB);
             this.Controls.Add(this.btnGetDBs);
@@ -138,6 +164,7 @@
         private System.Windows.Forms.Button btnGetDBs;
         private System.Windows.Forms.ListBox listDB;
         private System.Windows.Forms.Button btnDropDB;
+        private System.Windows.Forms.TextBox textNewDB;
+        private System.Windows.Forms.Button btnCreateDB;
     }
 }
-

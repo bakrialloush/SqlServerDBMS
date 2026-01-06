@@ -9,6 +9,8 @@ namespace Douha_DBMS
 {
     public partial class MainForm : Form
     {
+        private bool isConnected = false;
+
         public MainForm()
         {
             InitializeComponent();
@@ -51,10 +53,15 @@ namespace Douha_DBMS
                             databaseNames.Add(databaseName);
                         }
                     }
+
+                    isConnected = true;
+                    UpdateControlStates();
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error: " + ex.Message);
+                    isConnected = false;
+                    UpdateControlStates();
                 }
                 finally
                 {
@@ -64,6 +71,13 @@ namespace Douha_DBMS
             }
 
             return databaseNames;
+        }
+
+        private void UpdateControlStates()
+        {
+            textNewDB.Enabled = isConnected;
+            btnCreateDB.Enabled = isConnected;
+            btnDropDB.Enabled = isConnected;
         }
 
         private void CheckAuth_CheckedChanged(object sender, EventArgs e)
@@ -97,6 +111,40 @@ namespace Douha_DBMS
                         }
                     }
 
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+                finally
+                {
+                    ReloadDBs();
+                    Cursor = Cursors.Default;
+                    Enabled = true;
+                }
+            }
+        }
+
+        private void BtnCreateDB_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(textNewDB.Text))
+            {
+                try
+                {
+                    Enabled = false;
+                    Cursor = Cursors.WaitCursor;
+
+                    var createCommand = $"CREATE DATABASE [{textNewDB.Text}]";
+                    var connection = new SqlConnection();
+                    using (SqlCommand command = new SqlCommand(createCommand, connection))
+                    {
+                        var security = $"False;User ID={textUser.Text};Password={textPW.Text}";
+                        security = checkAuth.Checked ? "True" : security;
+                        connection.ConnectionString = $@"Data Source={textServer.Text};Integrated Security={security}";
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                    }
+                    textNewDB.Text = "";
                 }
                 catch (Exception ex)
                 {
